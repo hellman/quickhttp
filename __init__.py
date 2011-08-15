@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 #-*- coding:utf-8 -*-
 """
-libhttp - module for quick http requests
+quickhttp - module for quick http requests
 Usage:
 
-import libhttp
-libhttp.req("http://www.google.com",
+import quickhttp
+quickhttp.req("http://www.google.com",
     headers=headers     # dict or list of strings
     cookie=cookie       # dict or str like "a=b&c=d"
     data=post_data      # dict or str like "a=b&c=d"
