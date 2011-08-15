@@ -1,0 +1,28 @@
+quickhttp
+====================
+
+This library allows quick http requests with only one call:
+
+<pre>
+from quickhttp import req
+print req("http://www.something.com").data
+print req("http://www.google.com").headers
+
+req("http://www.example.com",
+    headers=headers     # dict or list of strings
+    cookie=cookie       # dict or str like "a=b&c=d"
+    data=post_data      # dict or str like "a=b&c=d"
+    get=get_data        # dict or str like "a=b&c=d"
+    auth=(user, pass)   # tuple (HTTP Basic Auth)
+    proxy="host:port"   # both for http and https
+    proxy_auth=(u, p)   # tuple for proxy auth
+    timeout=10          # 10 seconds
+)
+</pre>
+
+About
+---------------------
+
+Author: hellman ( hellman1908@gmail.com )
+
+License: GNU General Public License v2 (http://opensource.org/licenses/gpl-2.0.php)
