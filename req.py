@@ -23,7 +23,6 @@ import urllib
 import urllib2
 from MultipartPostHandler import MultipartPostHandler as UploadHandler
 
-
 _PASSWORD_MGR = urllib2.HTTPPasswordMgrWithDefaultRealm
 
 
@@ -164,25 +163,6 @@ class req():
         return
 
 
-class UploadFile:
-    def __init__(self, s, filename):
-        if type(s) == str:
-            self.data = str(s)
-        elif type(s) == file:
-            self.data = s.read()
-        else:
-            raise TypeError("Unknown type passed to UploadFile")
-
-        self.upload_name = filename
-        self.size = len(self.data)
-
-    def seek(self, x):
-        pass
-
-    def read(self, l=None):
-        return self.data
-
-
 def _dict_from_str(data, item_sep, key_sep):
     lst = data.split(item_sep)
     d = {}
@@ -202,82 +182,3 @@ def _raw_headers_to_dict(s):
         key = key.lower()
         headers[key] = value
     return headers
-
-
-def main():
-    """
-    Usage example.
-    """
-    data = {"username": "hellman", "password": 1234,
-            "picture": UploadFile(open("avatar.jpg"), "uploaded_filename.jpg")}
-                # or open ("avatar.jpg") - uploaded filename will be avatar.jpg
-
-    r = req("http://localhost/auth_test/index.php?id=3",
-        get={"page": 10, "order": "None"},  # or "page=10&order=None",
-        auth=("hellman", "preved"),
-        headers=["User-Agent: NotMozilla/5.0", "Cookie: PHPSESSID=blabla"],
-        cookie={"adv_id": 10, "cache": "blabla"},  # or "adv_id=10&cache=blabla",
-        data=data)  # or "username=hellman&password=1234" (but without file)
-
-    print "[HEADERS]"
-    print r.headers
-    print
-
-    print "[HTML PAGE]"
-    print r.data
-    print
-
-    return
-
-
-#[HEADERS]
-    #Date: Sun, 10 Apr 2011 05:40:34 GMT
-    #Server: Apache/2.2.16 (Ubuntu)
-    #X-Powered-By: PHP/5.3.3-1ubuntu9.3
-    #Vary: Accept-Encoding
-    #Content-Length: 755
-    #Connection: close
-    #Content-Type: text/html
-
-
-#[HTML PAGE]
-    #COOKIE:
-    #'PHPSESSID' => 'blabla'
-    #'cache' => 'blabla'
-    #'adv_id' => '10'
-
-    #POST:
-    #'username' => 'hellman'
-    #'password' => '1234'
-
-    #GET:
-    #'id' => '3'
-    #'page' => '10'
-    #'order' => 'None'
-
-    #FILES:
-    #Array
-    #(
-    #    [picture] => Array
-    #        (
-    #            [name] => uploaded_filename.jpg
-    #            [type] => image/jpeg
-    #            [tmp_name] => /tmp/phpD9r0Sk
-    #            [error] => 0
-    #            [size] => 31425
-    #        )
-
-    #)
-
-    #REQUEST_HEADERS:
-    #'Accept-Encoding' => 'identity'
-    #'Content-Length' => '31822'
-    #'Connection' => 'close'
-    #'User-Agent' => 'NotMozilla/5.0'
-    #'Host' => 'localhost'
-    #'Cookie' => 'PHPSESSID=blabla; cache=blabla; adv_id=10'
-    #'Content-Type' => 'multipart/form-data; boundary=127.0.0.1.1000.30512.1302414034.040.1'
-    #'Authorization' => 'Basic aGVsbG1hbjpwcmV2ZWQ='
-
-if __name__ == "__main__":
-    main()
