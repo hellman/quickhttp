@@ -1,6 +1,11 @@
 quickhttp
 ====================
 
+Notice: <a href="http://python-requests.org">Requests: HTTP for Humans</a> (<a href="https://github.com/kennethreitz/requests">on github</a>) is much better than this one.
+Use quickhttp only if you want to run some old script which needs it.
+
+---
+
 This library allows quick http requests with only one call:
 
 ```python
