@@ -3,7 +3,7 @@ quickhttp
 
 This library allows quick http requests with only one call:
 
-<pre>
+```python
 from quickhttp import req
 print req("http://www.something.com").data
 print req("http://www.google.com").headers
@@ -18,7 +18,7 @@ req("http://www.example.com",
     proxy_auth=(u, p)   # tuple for proxy auth
     timeout=10          # 10 seconds
 )
-</pre>
+```
 
 About
 ---------------------
