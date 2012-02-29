@@ -103,6 +103,9 @@ class req():
 
         if "?" in self.url and self.url[-1] != "?":
             self.url += "&"
+        if "?" not in self.url:
+            self.url += "?"
+        
         
         gets = []
         for key in get:
@@ -153,7 +156,7 @@ class req():
                 str_data[str(key)] = value
             else:
                 str_data[str(key)] = str(value)
-
+        
         if self.is_file_post:
             self.data = str_data  # Multipart handler encodes it byself
         else:
@@ -196,7 +199,7 @@ def _raw_headers_to_dict(s):
         line = line.strip()
         pos = line.find(":")
         key, value = line[:pos], line[pos+1:].strip()
-        key = key[0].upper() + key[1:]
+        key = key.lower()
         headers[key] = value
     return headers
 
